@@ -1,9 +1,28 @@
 @import "tailwindcss";
 
+@font-face {
+	font-family: Manrope;
+	src: url("./assets/fonts/Manrope-VariableFont_wght.ttf");
+}
+
 body {
 	margin: 0;
+	font-family: Manrope;
 }
 
 @theme {
 	--color-tomato: tomato;
+
+	/* Primary */
+	--color-Blue-200: hsl(193, 38%, 86%);
+	--color-Green-300: hsl(150, 100%, 66%);
+
+	/* Neutral */
+	--color-Blue-600: hsl(217, 19%, 38%);
+	--color-Blue-900: hsl(217, 19%, 24%);
+	--color-Blue-950: hsl(218, 23%, 16%);
+}
+
+.qout {
+	transform: rotate(180deg);
 }
