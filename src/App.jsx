@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import line from "./assets/images/pattern-divider-mobile.svg";
+import lineMob from "./assets/images/pattern-divider-mobile.svg";
+import lineDesk from "./assets/images/pattern-divider-desktop.svg";
 import barcode from "./assets/images/icon-dice.svg";
 
 export default function App() {
 	const [advice, setAdvice] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
+
+	function handleWidth(e) {
+		console.log(e);
+	}
 	useEffect(() => {
 		fetch("https://api.adviceslip.com/advice")
 			.then((res) => {
@@ -33,13 +38,16 @@ export default function App() {
 	}
 
 	return (
-		<main className="bg-Blue-950 min-h-dvh text-Blue-200 flex justify-center items-center p-5">
+		<main
+			className="bg-Blue-950 min-h-dvh text-Blue-200 flex justify-center items-center p-5 min-w-[375px]"
+			onChange={handleWidth}
+		>
 			{error ? (
 				<p className="text-center mt-20 text-4xl text-tomato">{error}</p>
 			) : loading ? (
 				<p className="text-center mt-20 text-4xl text-tomato/50">Loading ...</p>
 			) : (
-				<div className="bg-Blue-900 p-7 pb-12 rounded-2xl text-center relative">
+				<div className="bg-Blue-900 p-7 sm:pb-10 sm:w-lg pb-12 rounded-2xl text-center relative w-sm sm:px-10">
 					{/* Advice #<!-- Advice ID goes here --> */}
 					<p className="text-Green-300 tracking-[4px] font-semibold text-sm mb-7 mt-5">
 						ADVICE #{advice?.slip?.id}
@@ -49,7 +57,13 @@ export default function App() {
 						<span className="">&#8220;</span>
 						{advice?.slip?.advice}&#8221;
 					</p>
-					<img className="my-5 w-full" src={line} alt="divider line" />
+					<div>
+						<picture>
+							<source media="(min-width: 640px)" srcSet={lineDesk} />
+							<source media="(max-width: 640px)" srcSet={lineMob} />
+							<img className="my-5 sm:my-8 w-full" alt="Advice card" />
+						</picture>
+					</div>
 					<div
 						className="
 					bg-Green-300 w-16 h-16 
